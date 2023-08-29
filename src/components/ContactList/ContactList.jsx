@@ -9,15 +9,19 @@ import { removeContact } from 'redux/contactsSlice';
 const ContactList = () => {
   const contacts = useSelector(getVisibleContacts);
   const dispatch = useDispatch();
-  const handleDelete = () => dispatch(removeContact());
+  
+  const handleDelete = (id) => {
+    dispatch(removeContact(id));
+  };
+  
   return (
     <List>
       {contacts.map(contact => (
         <Item key={contact.id}>
           {contact.name + ' : ' + contact.number}
           {
-          // Кнопка видалення контакту
-          <Button type="button" name="delete" onClick={handleDelete}>
+            // Кнопка видалення контакту
+            <Button type="button" name="delete" onClick={() => handleDelete(contact.id)}>
               <DeleteIcon fill="#000000" width="20" height="20" />
               delete
             </Button>
